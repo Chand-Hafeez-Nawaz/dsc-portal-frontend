@@ -33,7 +33,7 @@ function ChangePassword() {
     }
 
     const res = await axios.put(
-      "http://localhost:5000/api/auth/change-password",
+      "https://dsc-portal-backend-5eaw.onrender.com/api/auth/change-password",
       {
         currentPassword,
         newPassword,

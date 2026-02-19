@@ -30,7 +30,7 @@ function AdminDashboard() {
   /* ================= FETCH EVENTS ================= */
   const fetchEvents = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/events");
+      const res = await axios.get("https://dsc-portal-backend-5eaw.onrender.com/api/events");
       setEvents(res.data);
     } catch {
       console.log("Failed to fetch events");
@@ -41,7 +41,7 @@ function AdminDashboard() {
   const fetchSchools = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/schools",
+        "https://dsc-portal-backend-5eaw.onrender.com/api/schools",
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setSchools(res.data);
@@ -53,7 +53,7 @@ function AdminDashboard() {
   /* ================= FETCH GALLERY ================= */
   const fetchGallery = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/gallery");
+      const res = await axios.get("https://dsc-portal-backend-5eaw.onrender.com/api/gallery");
       setGalleryImages(res.data);
     } catch {
       console.log("Failed to fetch gallery");
@@ -73,13 +73,13 @@ function AdminDashboard() {
     try {
       if (editId) {
         await axios.put(
-          `http://localhost:5000/api/events/${editId}`,
+          `https://dsc-portal-backend-5eaw.onrender.com/api/events/${editId}`,
           formData
         );
         setEditId(null);
       } else {
         await axios.post(
-          "http://localhost:5000/api/events",
+          "https://dsc-portal-backend-5eaw.onrender.com/api/events",
           formData
         );
       }
@@ -113,7 +113,7 @@ function AdminDashboard() {
 
     try {
       await axios.delete(
-        `http://localhost:5000/api/events/${id}`
+        `https://dsc-portal-backend-5eaw.onrender.com/api/events/${id}`
       );
       fetchEvents();
     } catch {
@@ -139,7 +139,7 @@ const handleGalleryUpload = async (e) => {
 
   try {
     await axios.post(
-      "http://localhost:5000/api/gallery/upload",
+      "https://dsc-portal-backend-5eaw.onrender.com/api/gallery/upload",
       formData,
       { headers: { "Content-Type": "multipart/form-data" } }
     );
@@ -161,7 +161,7 @@ const handleGalleryUpload = async (e) => {
 
     try {
       await axios.delete(
-        `http://localhost:5000/api/gallery/${id}`
+        `https://dsc-portal-backend-5eaw.onrender.com/api/gallery/${id}`
       );
       fetchGallery();
     } catch {
@@ -254,7 +254,7 @@ const handleGalleryUpload = async (e) => {
 
             {event.brochure && (
               <a
-                href={`http://localhost:5000/${event.brochure}`}
+                href={`https://dsc-portal-backend-5eaw.onrender.com/${event.brochure}`}
                 target="_blank"
                 rel="noreferrer"
                 className="download-btn"
@@ -300,7 +300,7 @@ const handleGalleryUpload = async (e) => {
         {galleryImages.map((img) => (
           <div key={img._id} className="gallery-card">
             <img
-              src={`http://localhost:5000/${img.image}`}
+              src={`https://dsc-portal-backend-5eaw.onrender.com/${img.image}`}
               alt="gallery"
               className="gallery-img"
             />
