@@ -8,7 +8,6 @@ function AdminDashboard() {
   const navigate = useNavigate();
 
   const [events, setEvents] = useState([]);
-  const [schools, setSchools] = useState([]);
   const [galleryImages, setGalleryImages] = useState([]);
 
   const [title, setTitle] = useState("");
@@ -23,7 +22,6 @@ function AdminDashboard() {
 
   useEffect(() => {
     fetchEvents();
-    fetchSchools();
     fetchGallery();
   }, []);
 
@@ -34,19 +32,6 @@ function AdminDashboard() {
       setEvents(res.data);
     } catch {
       console.log("Failed to fetch events");
-    }
-  };
-
-  /* ================= FETCH SCHOOLS ================= */
-  const fetchSchools = async () => {
-    try {
-      const res = await axios.get(
-        "https://dsc-portal-backend-5eaw.onrender.com/api/schools",
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      setSchools(res.data);
-    } catch {
-      console.log("Failed to fetch schools");
     }
   };
 
