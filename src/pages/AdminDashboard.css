@@ -1,0 +1,267 @@
+/* ============================= */
+/* MAIN DASHBOARD WRAPPER */
+/* ============================= */
+
+.admin-dashboard {
+  padding: 40px;
+  background: linear-gradient(135deg, #eef2f7, #dbe7ff);
+  min-height: 100vh;
+}
+
+/* ============================= */
+/* CREATE EVENT CARD */
+/* ============================= */
+
+.create-card {
+  background: rgba(37, 101, 174, 0.9);
+  padding: 30px;
+  margin-bottom: 40px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  transition: 0.3s ease;
+}
+
+.create-card h2 {
+  font-size: 26px;
+  color: bisque;
+  margin-bottom: 20px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.create-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.create-card input,
+.create-card textarea {
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+/* Premium Government Button */
+.gov-btn {
+  margin-top: 10px;
+  padding: 12px;
+  background: #ffffff;
+  color: #2565ae;
+  border: 2px solid #ffffff;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.gov-btn:hover {
+  background: transparent;
+  color: rgb(243, 136, 50);
+  border: 2px solid white;
+  transform: translateY(-3px);
+}
+
+/* ============================= */
+/* SECTION TITLES */
+/* ============================= */
+
+.section-title {
+  margin: 40px 0 20px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #1b263b;
+}
+
+/* ============================= */
+/* GRID LAYOUT */
+/* ============================= */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+/* ============================= */
+/* CARD DESIGN */
+/* ============================= */
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.07);
+  transition: 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* ============================= */
+/* STATUS */
+/* ============================= */
+
+.approved {
+  color: green;
+  font-weight: bold;
+}
+
+.pending {
+  color: red;
+  font-weight: bold;
+}
+
+/* ============================= */
+/* ACTION BUTTONS */
+/* ============================= */
+
+.action-buttons {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+}
+
+.edit-btn {
+  background: #0b5ed7;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.delete-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.approve-btn {
+  background: green;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Download Link */
+.download-btn {
+  display: inline-block;
+  margin-top: 10px;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.download-btn:hover {
+  text-decoration: underline;
+}
+
+/* ============================= */
+/* CHANGE PASSWORD CARD */
+/* ============================= */
+
+.change-password-card {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+
+  /* CENTERING */
+  max-width: 450px;
+  margin: 60px auto; /* this centers it */
+}
+
+.change-password-card h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #1b263b;
+}
+
+.change-password-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.change-password-card input {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+/* ================= GALLERY GRID ================= */
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.gallery-card {
+  background: rgb(255, 255, 255);
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  text-align: center;
+  transition: 0.3s;
+}
+
+.gallery-card:hover {
+  transform: translateY(-5px);
+}
+
+.gallery-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.report-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.delete-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.delete-btn:hover {
+  background: #b02a37;
+}
+
+/* ============================= */
+/* RESPONSIVE */
+/* ============================= */
+
+@media (max-width: 768px) {
+  .admin-dashboard {
+    padding: 20px;
+  }
+
+  .create-card,
+  .change-password-card {
+    padding: 20px;
+  }
+}

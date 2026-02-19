@@ -1,0 +1,153 @@
+/* ================= PAGE BACKGROUND ================= */
+.about-page {
+  padding: 120px 20px 80px 20px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #eef2f7, #dbe7ff);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+/* ================= MAIN HEADING ================= */
+.about-page h2 {
+  font-size: 42px;
+  font-weight: 700;
+  color: #0b3d91;
+  margin-bottom: 20px;
+  text-align: center;
+  position: relative;
+}
+
+/* Elegant underline */
+.about-page h2::after {
+  content: "";
+  width: 110px;
+  height: 4px;
+  background: linear-gradient(to right, #0b3d91, #f9a825);
+  display: block;
+  margin: 12px auto 0;
+  border-radius: 4px;
+}
+
+/* ================= INTRO TEXT ================= */
+.about-intro {
+  max-width: 900px;
+  font-size: 18px;
+  line-height: 1.8;
+  text-align: center;
+  color: #333;
+  margin-bottom: 50px;
+}
+
+/* ================= ABOUT CONTENT CARD ================= */
+.about-content {
+  max-width: 1000px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+  transition: 0.4s ease;
+  margin-bottom: 60px;
+}
+
+.about-content:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+}
+
+.about-content p {
+  font-size: 17px;
+  line-height: 1.8;
+  margin-bottom: 15px;
+  color: #444;
+}
+
+/* ================= KEY DETAILS SECTION ================= */
+.about-details {
+  width: 100%;
+  max-width: 1100px;
+}
+
+.about-details h3 {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 35px;
+  color: #0b3d91;
+  font-weight: 600;
+}
+
+/* Grid layout */
+.about-details ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+/* Individual detail cards */
+.about-details li {
+  background: white;
+  padding: 28px;
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+  transition: 0.4s ease;
+  position: relative;
+  font-size: 15px;
+  color: #333;
+}
+
+/* Blue top border accent */
+.about-details li::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 5px;
+  width: 100%;
+  background: linear-gradient(to right, #0b3d91, #f9a825);
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+}
+
+.about-details li strong {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #0b3d91;
+}
+
+/* Hover effect */
+.about-details li:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 45px rgba(11,61,145,0.2);
+}
+
+/* ================= ANIMATION ================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .about-page h2 {
+    font-size: 28px;
+  }
+
+  .about-content {
+    padding: 25px;
+  }
+
+  .about-details li {
+    padding: 22px;
+  }
+}
