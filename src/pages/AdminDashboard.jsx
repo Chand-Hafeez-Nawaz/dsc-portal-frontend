@@ -53,8 +53,9 @@ function AdminDashboard() {
     formData.append("title", title);
     formData.append("description", description);
     formData.append("date", date);
-    if (brochure) formData.append("brochure", brochure);
-
+    if (brochure) {
+      formData.append("brochure", brochure);
+    }
     try {
       if (editId) {
         await axios.put(
