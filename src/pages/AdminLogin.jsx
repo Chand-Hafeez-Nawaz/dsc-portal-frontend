@@ -14,7 +14,7 @@ function AdminLogin() {
     console.log("LOGIN BUTTON CLICKED")
 
     try {
-      const res = await api.post(
+      const res = await axios.post(
         `/api/auth/login`,
         {
           email: email.trim(),     // ✅ important
