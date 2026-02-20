@@ -9,16 +9,35 @@
 }
 
 /* ============================= */
+/* TOPBAR */
+/* ============================= */
+
+.admin-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+  gap: 15px;
+}
+
+.left-buttons,
+.right-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ============================= */
 /* CREATE EVENT CARD */
 /* ============================= */
 
 .create-card {
-  background: rgba(37, 101, 174, 0.9);
+  background: rgba(37, 101, 174, 0.95);
   padding: 30px;
   margin-bottom: 40px;
   border-radius: 15px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-  transition: 0.3s ease;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
 }
 
 .create-card h2 {
@@ -32,7 +51,7 @@
 .create-card form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
 .create-card input,
@@ -44,13 +63,15 @@
   font-size: 14px;
 }
 
-/* Premium Government Button */
+/* ============================= */
+/* PREMIUM GOVERNMENT BUTTON */
+/* ============================= */
+
 .gov-btn {
-  margin-top: 10px;
-  padding: 12px;
-  background: #ffffff;
+  padding: 10px 18px;
+  background: white;
   color: #2565ae;
-  border: 2px solid #ffffff;
+  border: 2px solid white;
   border-radius: 30px;
   font-weight: 600;
   cursor: pointer;
@@ -59,9 +80,25 @@
 
 .gov-btn:hover {
   background: transparent;
-  color: rgb(243, 136, 50);
-  border: 2px solid white;
+  color: orange;
   transform: translateY(-3px);
+}
+
+/* Logout Button */
+.logout-btn {
+  background: linear-gradient(135deg, #dc3545, #b02a37);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.logout-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(220,53,69,0.4);
 }
 
 /* ============================= */
@@ -102,18 +139,12 @@
   transform: translateY(-5px);
 }
 
-/* ============================= */
-/* STATUS */
-/* ============================= */
-
-.approved {
-  color: green;
-  font-weight: bold;
+.card h3 {
+  margin-bottom: 8px;
 }
 
-.pending {
-  color: red;
-  font-weight: bold;
+.card p {
+  margin: 5px 0;
 }
 
 /* ============================= */
@@ -121,45 +152,54 @@
 /* ============================= */
 
 .action-buttons {
-  margin-top: 12px;
+  margin-top: 15px;
   display: flex;
-  gap: 10px;
+  gap: 12px;
 }
 
-.edit-btn {
-  background: #0b5ed7;
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
+.edit-btn,
 .delete-btn {
-  background: #dc3545;
-  color: white;
+  flex: 1;
+  padding: 8px 0;
+  border-radius: 8px;
   border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
+  font-weight: 600;
   cursor: pointer;
+  transition: 0.3s ease;
 }
 
-.approve-btn {
-  background: green;
+/* Edit */
+.edit-btn {
+  background: linear-gradient(135deg, #0d6efd, #2565ae);
   color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  cursor: pointer;
 }
 
-/* Download Link */
+.edit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(13,110,253,0.3);
+}
+
+/* Delete */
+.delete-btn {
+  background: linear-gradient(135deg, #dc3545, #b02a37);
+  color: white;
+}
+
+.delete-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(220,53,69,0.3);
+}
+
+/* ============================= */
+/* DOWNLOAD LINK */
+/* ============================= */
+
 .download-btn {
   display: inline-block;
   margin-top: 10px;
   color: #ffffff;
-  text-decoration: none;
   font-weight: bold;
+  text-decoration: none;
 }
 
 .download-btn:hover {
@@ -167,40 +207,8 @@
 }
 
 /* ============================= */
-/* CHANGE PASSWORD CARD */
+/* GALLERY */
 /* ============================= */
-
-.change-password-card {
-  background: white;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-
-  /* CENTERING */
-  max-width: 450px;
-  margin: 60px auto; /* this centers it */
-}
-
-.change-password-card h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #1b263b;
-}
-
-.change-password-card form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.change-password-card input {
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  outline: none;
-}
-
-/* ================= GALLERY GRID ================= */
 
 .gallery-grid {
   display: grid;
@@ -210,7 +218,7 @@
 }
 
 .gallery-card {
-  background: rgb(255, 255, 255);
+  background: white;
   padding: 10px;
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.08);
@@ -230,25 +238,22 @@
   margin-bottom: 10px;
 }
 
+/* ============================= */
+/* REPORT BUTTONS SECTION */
+/* ============================= */
+
 .report-buttons {
   display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
+  justify-content: center;      /* center horizontally */
+  align-items: center;
+  gap: 20px;                     /* spacing between buttons */
+  margin-bottom: 40px;
+  flex-wrap: wrap;               /* responsive wrap */
 }
 
-.delete-btn {
-  background: #dc3545;
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.delete-btn:hover {
-  background: #b02a37;
+.report-buttons .gov-btn {
+  min-width: 200px;
+  text-align: center;
 }
 
 /* ============================= */
@@ -260,8 +265,12 @@
     padding: 20px;
   }
 
-  .create-card,
-  .change-password-card {
+  .create-card {
     padding: 20px;
+  }
+
+  .admin-topbar {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }

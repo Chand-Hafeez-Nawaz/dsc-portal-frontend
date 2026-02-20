@@ -10,7 +10,6 @@ const images = Object.entries(
   })
 );
 
-// Separate new images and normal images
 const normalImages = [];
 const newImages = [];
 
@@ -22,12 +21,10 @@ images.forEach(([path, img]) => {
   }
 });
 
-// Final order:
-// img1 + new images + remaining normal images
 const localImages = [
-  normalImages[0],     // img1
-  ...newImages,        // new1,new2,new3
-  ...normalImages.slice(1), // remaining 38 images
+  normalImages[0],
+  ...newImages,
+  ...normalImages.slice(1),
 ];
 
 function Gallery() {
@@ -52,38 +49,36 @@ function Gallery() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [selectedIndex]);
 
+  /* ================= FETCH GALLERY ================= */
+
   const fetchGallery = async () => {
     try {
-      const res = await axios.get("${import.meta.env.VITE_API_URL}/api/gallery");
-      setUploadedImages(res.data);
+      const res = await api.get("/api/gallery");
+      setUploadedImages(res.data || []);
       setLoading(false);
     } catch (error) {
-      console.log("Error fetching gallery");
+      console.log("Error fetching gallery", error);
       setLoading(false);
     }
   };
 
   /* ================= IMAGE ORDER LOGIC ================= */
 
-  // 1️⃣ Pick img1, img3, img5 safely
   const firstThreeLocal = localImages.filter((_, index) =>
     [0, 2, 4].includes(index)
   );
 
-  // 2️⃣ First 3 uploaded images
-  const firstThreeUploaded = uploadedImages
+    const firstThreeUploaded = uploadedImages
     .slice(0, 3)
-    .map((img) => `http://localhost:5000/${img.image}`);
+    .map((img) => `${import.meta.env.VITE_API_URL}${img.image}`);
 
-  // 3️⃣ Remaining local images
   const remainingLocal = localImages.filter(
     (_, index) => ![0, 2, 4].includes(index)
   );
 
-  // 4️⃣ Remaining uploaded images
   const remainingUploaded = uploadedImages
-    .slice(3)
-    .map((img) => `http://localhost:5000/${img.image}`);
+  .slice(3)
+  .map((img) => `${import.meta.env.VITE_API_URL}${img.image}`);
 
   const allImages = [
     ...firstThreeLocal,
@@ -92,7 +87,7 @@ function Gallery() {
     ...remainingUploaded,
   ];
 
-  /* ===================================================== */
+  /* ================= NAVIGATION ================= */
 
   const showNext = () => {
     setSelectedIndex((prev) =>
@@ -117,7 +112,7 @@ function Gallery() {
       ) : (
         <div className="gallery-grid">
           {allImages.map((img, index) => (
-            <div key={index} className="gallery-card" data-aos="fade-up">
+            <div key={index} className="gallery-card">
               <img
                 src={img}
                 alt="gallery"

@@ -1,17 +1,18 @@
-
 import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 
 function Navbar() {
   const navigate = useNavigate();
-  const role = localStorage.getItem("role");
+
+  // 🔥 Use token instead of role
+  const token = localStorage.getItem("token");
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
     navigate("/");
-    window.location.reload(); // refresh navbar state
+    window.location.reload(); // safe for demo
   };
 
   return (
@@ -31,26 +32,23 @@ function Navbar() {
           <Link to="/about">About</Link>
           <Link to="/contact">Contact</Link>
 
-          {/* NOT LOGGED IN */}
-          {!role && (
+          {token ? (
+            <>
+              <Link to="/admin-dashboard" className="dashboard-btn">
+                Dashboard
+              </Link>
+
+              <button onClick={handleLogout} className="logout-btn">
+                Logout
+              </button>
+            </>
+          ) : (
             <button
               className="login-btn"
               onClick={() => navigate("/admin-login")}
             >
               Login
             </button>
-          )}
-
-          {/* ADMIN LOGGED IN */}
-          {role === "admin" && (
-            <>
-              <Link to="/admin-dashboard" className="dashboard-btn">
-                Dashboard
-              </Link>
-              <button onClick={handleLogout} className="logout-btn">
-                Logout
-              </button>
-            </>
           )}
         </nav>
       </div>

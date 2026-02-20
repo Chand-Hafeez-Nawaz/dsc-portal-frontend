@@ -17,8 +17,8 @@ function AdminDashboard() {
   const [editId, setEditId] = useState(null);
 
   const [galleryImagesToUpload, setGalleryImagesToUpload] = useState([]);
-
-  const API_URL ="https://dsc-portal-backend-5eaw.onrender.com";
+  const [fileKey, setFileKey] = useState(Date.now());
+  const [galleryKey, setGalleryKey] = useState(Date.now());
 
   useEffect(() => {
     fetchEvents();
@@ -29,14 +29,9 @@ function AdminDashboard() {
   const fetchEvents = async () => {
     try {
       const res = await api.get("/api/events");
-
-      if (Array.isArray(res.data)) {
-        setEvents(res.data);
-      } else {
-        setEvents([]);
-      }
+      setEvents(Array.isArray(res.data) ? res.data : []);
     } catch (error) {
-      console.error(error);
+      console.error("Events fetch error:", error);
       setEvents([]);
     }
   };
@@ -44,15 +39,10 @@ function AdminDashboard() {
   /* ================= FETCH GALLERY ================= */
   const fetchGallery = async () => {
     try {
-      const res = await axios.get(`https://dsc-portal-backend-5eaw.onrender.com/api/gallery`);
-
-      if (Array.isArray(res.data)) {
-        setGalleryImages(res.data);
-      } else {
-        setGalleryImages([]);
-      }
+      const res = await api.get("/api/gallery");
+      setGalleryImages(Array.isArray(res.data) ? res.data : []);
     } catch (error) {
-      console.log("Failed to fetch gallery", error);
+      console.error("Gallery fetch error:", error);
       setGalleryImages([]);
     }
   };
@@ -65,146 +55,122 @@ function AdminDashboard() {
     formData.append("title", title);
     formData.append("description", description);
     formData.append("date", date);
-    if (brochure) {
-      formData.append("brochure", brochure);
-    }
+    if (brochure) formData.append("brochure", brochure);
 
     try {
       if (editId) {
-        await axios.put(
-          `https://dsc-portal-backend-5eaw.onrender.com/api/events/${editId}`,
-          formData
-        );
-        setEditId(null);
+        await api.put(`/api/events/${editId}`, formData);
+        toast.success("Event updated ✅");
       } else {
-        await axios.post(
-          `https://dsc-portal-backend-5eaw.onrender.com/api/events`,
-          formData
-        );
+        await api.post("/api/events", formData);
+        toast.success("Event created ✅");
       }
 
       setTitle("");
       setDescription("");
       setDate("");
       setBrochure(null);
-
+      setEditId(null);
+      setFileKey(Date.now());
       fetchEvents();
-      toast.success("Event saved successfully ✅");
     } catch (error) {
-      console.error(error);
+      console.error("Event save error:", error);
       toast.error("Event operation failed ❌");
     }
   };
 
-  /* ================= EDIT EVENT ================= */
-  const handleEditEvent = (event) => {
-    setTitle(event.title);
-    setDescription(event.description);
-    setDate(event.date?.substring(0, 10));
-    setEditId(event._id);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   /* ================= DELETE EVENT ================= */
   const handleDeleteEvent = async (id) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this event?"
-    );
-    if (!confirmDelete) return;
+    if (!window.confirm("Delete this event?")) return;
 
     try {
       await api.delete(`/api/events/${id}`);
-      fetchEvents();
       toast.success("Event deleted ✅");
+      fetchEvents();
     } catch (error) {
-      console.error(error);
-      toast.error("Delete Failed ❌");
+      console.error("Delete error:", error);
+      toast.error("Delete failed ❌");
     }
   };
 
   /* ================= GALLERY UPLOAD ================= */
   const handleGalleryUpload = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (!galleryImagesToUpload.length) {
-      toast.warning("Please select images");
-      return;
-    }
+  if (!galleryImagesToUpload.length) {
+    toast.warning("Select images first");
+    return;
+  }
 
-    const formData = new FormData();
+  const formData = new FormData();
 
-    for (let i = 0; i < galleryImagesToUpload.length; i++) {
-      formData.append("images", galleryImagesToUpload[i]);
-    }
+  for (let i = 0; i < galleryImagesToUpload.length; i++) {
+  formData.append("images", galleryImagesToUpload[i]); // ✅ must match backend
+}
 
-    try {
-      await axios.post(
-        `https://dsc-portal-backend-5eaw.onrender.com/api/gallery/upload`,
-        formData,
-        { headers: { "Content-Type": "multipart/form-data" } }
-      );
+  try {
+    await api.post("/api/gallery/upload", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
 
-      toast.success("Images uploaded successfully ✅");
-      setGalleryImagesToUpload([]);
-      fetchGallery();
-    } catch (err) {
-      console.error(err);
-      toast.error("Gallery upload failed ❌");
-    }
-  };
+    toast.success("Images uploaded ✅");
+    setGalleryImagesToUpload([]);
+    setGalleryKey(Date.now());
+    fetchGallery();
+  } catch (error) {
+    console.error("Upload Error:", error.response?.data || error.message);
+    toast.error("Gallery upload failed ❌");
+  }
+};
 
-  /* ================= DELETE GALLERY IMAGE ================= */
+  /* ================= DELETE IMAGE ================= */
   const handleDeleteImage = async (id) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this image?"
-    );
-    if (!confirmDelete) return;
+    if (!window.confirm("Delete this image?")) return;
 
     try {
-      await axios.delete(`https://dsc-portal-backend-5eaw.onrender.com/api/gallery/${id}`);
-      fetchGallery();
+      await api.delete(`/api/gallery/${id}`);
       toast.success("Image deleted ✅");
+      fetchGallery();
     } catch (error) {
-      console.error(error);
-      toast.error("Delete Failed ❌");
+      console.error("Image delete error:", error);
+      toast.error("Delete failed ❌");
     }
   };
 
   return (
     <div className="admin-dashboard">
 
-      {/* REPORT BUTTONS */}
-      <div className="external-data-card">
-        <h2>Data & Reports</h2>
-        <div className="report-buttons">
-          <a
-            href="https://docs.google.com/forms/d/1WeWL29wvviqe1exda_rYBclFeb73zfdmYW-Xw7irmZw/edit#responses"
-            target="_blank"
-            rel="noreferrer"
-            className="gov-btn"
-          >
-            Feedback Responses
-          </a>
+      {/* ===== REPORT / ACTION BUTTONS ===== */}
+      <div className="report-buttons">
+        <button
+          className="gov-btn"
+          onClick={() => navigate("/change-password")}
+        >
+          Change Password
+        </button>
 
-          <a
-            href="https://docs.google.com/forms/d/1x3tnOTAE2ebVq1SzCfBmSXUdYrhcHdarTSnBYdsh5dc/edit#responses"
-            target="_blank"
-            rel="noreferrer"
-            className="gov-btn"
-          >
-            Student List Responses
-          </a>
+        <a
+          href="https://docs.google.com/forms/d/1WeWL29wvviqe1exda_rYBclFeb73zfdmYW-Xw7irmZw/edit#responses"
+          target="_blank"
+          rel="noreferrer"
+          className="gov-btn"
+        >
+          Feedback Responses
+        </a>
 
-          <button
-            className="gov-btn"
-            onClick={() => navigate("/change-password")}
-          >
-            Change Password
-          </button>
-        </div>
+        <a
+          href="https://docs.google.com/forms/d/1x3tnOTAE2ebVq1SzCfBmSXUdYrhcHdarTSnBYdsh5dc/edit#responses"
+          target="_blank"
+          rel="noreferrer"
+          className="gov-btn"
+        >
+          Student List Responses
+        </a>
       </div>
 
-      {/* CREATE EVENT */}
+      {/* ================= CREATE EVENT ================= */}
       <div className="create-card">
         <h2>{editId ? "Update Event" : "Create Event"}</h2>
 
@@ -232,6 +198,7 @@ function AdminDashboard() {
           />
 
           <input
+            key={fileKey}
             type="file"
             onChange={(e) => setBrochure(e.target.files[0])}
           />
@@ -242,77 +209,77 @@ function AdminDashboard() {
         </form>
       </div>
 
-      {/* EVENTS */}
+      {/* ================= EVENTS ================= */}
       <h2 className="section-title">All Events</h2>
+
       <div className="card-grid">
-        {Array.isArray(events) &&
-          events.map((event) => (
-            <div key={event._id} className="card">
-              <h3>{event.title}</h3>
-              <p>{event.description}</p>
-              <p>{new Date(event.date).toDateString()}</p>
+        {events.map((event) => (
+          <div key={event._id} className="card">
+            <h3>{event.title}</h3>
+            <p>{event.description}</p>
+            <p>{new Date(event.date).toDateString()}</p>
 
-              {event.brochure && (
-                <a
-                  href={event.brochure}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="download-btn"
-                >
-                  Download Brochure
-                </a>
-              )}
+            {event.brochure && (
+  <a
+    href={event.brochure}
+    download={event.brochure.split("/").pop()}
+    target="_blank"
+    rel="noreferrer"
+    className="download-btn"
+  >
+    Download Brochure
+  </a>
+)}
 
-              <div className="action-buttons">
-                <button
-                  className="edit-btn"
-                  onClick={() => handleEditEvent(event)}
-                >
-                  Edit
-                </button>
+            <div className="action-buttons">
+              <button
+                className="edit-btn"
+                onClick={() => {
+                  setTitle(event.title);
+                  setDescription(event.description);
+                  setDate(event.date?.substring(0, 10));
+                  setEditId(event._id);
+                }}
+              >
+                Edit
+              </button>
 
-                <button
-                  className="delete-btn"
-                  onClick={() => handleDeleteEvent(event._id)}
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          ))}
-      </div>
-
-      {/* GALLERY */}
-      <h2 className="section-title">Gallery Images</h2>
-
-      <div className="gallery-upload-card">
-        <form onSubmit={handleGalleryUpload}>
-          <input
-            type="file"
-            multiple
-            onChange={(e) => setGalleryImagesToUpload(e.target.files)}
-          />
-          <button className="gov-btn">Upload Image</button>
-        </form>
-      </div>
-
-      <div className="gallery-grid">
-        {Array.isArray(galleryImages) &&
-          galleryImages.map((img) => (
-            <div key={img._id} className="gallery-card">
-              <img
-                src={img.image}
-                alt="gallery"
-                className="gallery-img"
-              />
               <button
                 className="delete-btn"
-                onClick={() => handleDeleteImage(img._id)}
+                onClick={() => handleDeleteEvent(event._id)}
               >
                 Delete
               </button>
             </div>
-          ))}
+          </div>
+        ))}
+      </div>
+
+      {/* ================= GALLERY ================= */}
+      <h2 className="section-title">Gallery</h2>
+
+      <form onSubmit={handleGalleryUpload} className="gallery-upload-form">
+        <input
+          key={galleryKey}
+          type="file"
+          multiple
+          onChange={(e) => setGalleryImagesToUpload(e.target.files)}
+        />
+        <button className="gov-btn">Upload</button>
+      </form>
+
+      <div className="gallery-grid">
+        {galleryImages.map((img) => (
+          <div key={img._id} className="gallery-card">
+            <img src={img.image} alt="gallery" className="gallery-img" />
+            <button
+              className="delete-btn"
+              onClick={() => handleDeleteImage(img._id)}
+            >
+              Delete
+            </button>
+          </div>
+        ))}
       </div>
 
     </div>

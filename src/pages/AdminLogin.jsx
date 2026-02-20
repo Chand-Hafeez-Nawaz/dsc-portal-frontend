@@ -9,31 +9,33 @@ function AdminLogin() {
   const navigate = useNavigate();
   const API_URL="https://dsc-portal-backend-5eaw.onrender.com";
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    console.log("LOGIN BUTTON CLICKED")
+const handleLogin = async (e) => {
+  e.preventDefault();
+  console.log("LOGIN BUTTON CLICKED");
 
-    try {
-      const res = await axios.post(
-        `/api/auth/login`,
-        {
-          email: email.trim(),     // ✅ important
-          password: password.trim()
-        }
-      );
+  try {
+    const response = await api.post("/api/auth/login", {
+      email: email.trim(),
+      password: password.trim(),
+    });
 
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("role", res.data.user.role);
+    console.log("RESPONSE:", response);
 
-      if (res.data.user.role === "admin") {
-        navigate("/admin-dashboard");
-      }
+    // ✅ Store token
+    localStorage.setItem("token", response.data.token);
 
-    } catch (error) {
-      console.log(error.response);
-      alert("Login failed - check console");
+    // ✅ Store role (if exists)
+    if (response.data.user && response.data.user.role) {
+      localStorage.setItem("role", "admin");
     }
-  };
+
+    // ✅ Navigate to dashboard
+    navigate("/admin-dashboard");
+    window.location.reload();
+  } catch (error) {
+    console.log("FULL ERROR:", error);
+  }
+};
 
   return (
     <div className="admin-login-wrapper">
