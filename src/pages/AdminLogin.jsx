@@ -11,6 +11,7 @@ function AdminLogin() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    console.log("LOGIN BUTTON CLICKED")
 
     try {
       const res = await api.post(
