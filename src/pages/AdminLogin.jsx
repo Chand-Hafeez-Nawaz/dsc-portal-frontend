@@ -7,13 +7,14 @@ function AdminLogin() {
   const [email, setEmail] = useState("");   // ✅ must be email
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const API_URL="https://dsc-portal-backend-5eaw.onrender.com";
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
       const res = await axios.post(
-        "https://dsc-portal-backend-5eaw.onrender.com",
+        '${API_URL}/api/auth/login',
         {
           email: email.trim(),     // ✅ important
           password: password.trim()
