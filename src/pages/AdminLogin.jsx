@@ -14,7 +14,7 @@ function AdminLogin() {
 
     try {
       const res = await axios.post(
-        '${API_URL}/api/auth/login',
+        `${API_URL}/api/auth/login`,
         {
           email: email.trim(),     // ✅ important
           password: password.trim()

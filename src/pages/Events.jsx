@@ -8,10 +8,11 @@ function Events() {
   const [events, setEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [loading, setLoading] = useState(true);
+  const API_URL = "https://dsc-portal-backend-5eaw.onrender.com";
 
   useEffect(() => {
   axios
-    .get("https://dsc-portal-backend-5eaw.onrender.com")
+    .get(`${API_URL}/api/events`)
     .then((res) => {
       setEvents(res.data);
       setLoading(false);
@@ -85,7 +86,7 @@ function Events() {
 
             {selectedEvent.brochure && (
               <a
-                href={`https://dsc-portal-backend-5eaw.onrender.com/${selectedEvent.brochure}`}
+                href={`${selectedEvent.brochure}`}
                 target="_blank"
                 rel="noreferrer"
                 className="modal-download-btn"
