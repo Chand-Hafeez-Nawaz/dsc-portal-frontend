@@ -13,7 +13,7 @@ function AdminLogin() {
 
     try {
       const res = await axios.post(
-        "https://dsc-portal-backend-5eaw.onrender.com/api/auth/login",
+        "http://localhost:5000/api/auth/login",
         {
           email: email.trim(),     // ✅ important
           password: password.trim()

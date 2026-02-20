@@ -10,7 +10,7 @@ function Events() {
 
   useEffect(() => {
   axios
-    .get("https://dsc-portal-backend-5eaw.onrender.com/api/events")
+    .get("http://localhost:5000/api/events")
     .then((res) => {
       setEvents(res.data);
       setLoading(false);
@@ -84,7 +84,7 @@ function Events() {
 
             {selectedEvent.brochure && (
               <a
-                href={`https://dsc-portal-backend-5eaw.onrender.com/${selectedEvent.brochure}`}
+                href={`http://localhost:5000/${selectedEvent.brochure}`}
                 target="_blank"
                 rel="noreferrer"
                 className="modal-download-btn"

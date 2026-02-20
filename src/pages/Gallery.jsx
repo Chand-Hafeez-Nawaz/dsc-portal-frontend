@@ -54,7 +54,7 @@ function Gallery() {
 
   const fetchGallery = async () => {
     try {
-      const res = await axios.get("https://dsc-portal-backend-5eaw.onrender.com/api/gallery");
+      const res = await axios.get("http://localhost:5000/api/gallery");
       setUploadedImages(res.data);
       setLoading(false);
     } catch (error) {
@@ -73,7 +73,7 @@ function Gallery() {
   // 2️⃣ First 3 uploaded images
   const firstThreeUploaded = uploadedImages
     .slice(0, 3)
-    .map((img) => `https://dsc-portal-backend-5eaw.onrender.com/${img.image}`);
+    .map((img) => `http://localhost:5000/${img.image}`);
 
   // 3️⃣ Remaining local images
   const remainingLocal = localImages.filter(
@@ -83,7 +83,7 @@ function Gallery() {
   // 4️⃣ Remaining uploaded images
   const remainingUploaded = uploadedImages
     .slice(3)
-    .map((img) => `https://dsc-portal-backend-5eaw.onrender.com/${img.image}`);
+    .map((img) => `http://localhost:5000/${img.image}`);
 
   const allImages = [
     ...firstThreeLocal,
