@@ -38,7 +38,7 @@ function AdminDashboard() {
   /* ================= FETCH GALLERY ================= */
   const fetchGallery = async () => {
     try {
-      const res = await axios.get("${import.meta.env.VITE_API_URL}/api/gallery");
+      const res = await axios.get("http://localhost:5000/api/gallery");
       setGalleryImages(res.data);
     } catch {
       console.log("Failed to fetch gallery");
@@ -125,7 +125,7 @@ const handleGalleryUpload = async (e) => {
 
   try {
     await axios.post(
-      "${import.meta.env.VITE_API_URL}/api/gallery/upload",
+      "http://localhost:5000/api/gallery/upload",
       formData,
       { headers: { "Content-Type": "multipart/form-data" } }
     );
@@ -147,7 +147,7 @@ const handleGalleryUpload = async (e) => {
 
     try {
       await axios.delete(
-        `${import.meta.env.VITE_API_URL}/api/gallery/${id}`
+        `http://localhost:5000/api/gallery/${id}`
       );
       fetchGallery();
     } catch {
