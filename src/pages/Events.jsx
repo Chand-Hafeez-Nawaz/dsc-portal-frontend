@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../utils/axiosConfig";
 import "./Events.css";
 import Loader from "../components/Loader";
+import axios from "axios";
 
 function Events() {
   const [events, setEvents] = useState([]);
@@ -10,7 +11,7 @@ function Events() {
 
   useEffect(() => {
   axios
-    .get("http://localhost:5000/api/events")
+    .get("https://dsc-portal-backend-5eaw.onrender.com")
     .then((res) => {
       setEvents(res.data);
       setLoading(false);
@@ -84,7 +85,7 @@ function Events() {
 
             {selectedEvent.brochure && (
               <a
-                href={`http://localhost:5000/${selectedEvent.brochure}`}
+                href={`https://dsc-portal-backend-5eaw.onrender.com/${selectedEvent.brochure}`}
                 target="_blank"
                 rel="noreferrer"
                 className="modal-download-btn"

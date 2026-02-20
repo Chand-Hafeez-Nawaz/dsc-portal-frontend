@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../utils/axiosConfig";
 import "./Gallery.css";
 import Loader from "../components/Loader";
 

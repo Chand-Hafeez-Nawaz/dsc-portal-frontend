@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../utils/axiosConfig";
 import "./AdminLogin.css";
 
 function AdminLogin() {
@@ -13,7 +13,7 @@ function AdminLogin() {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        "https://dsc-portal-backend-5eaw.onrender.com",
         {
           email: email.trim(),     // ✅ important
           password: password.trim()
