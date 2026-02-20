@@ -4,7 +4,7 @@ import "./Navbar.css";
 
 function Navbar() {
   const navigate = useNavigate();
-  const role = localStorage.getItem("role");
+  const [role, setRole] = useState(localStorage.getItem("role"));
 
   const handleLogout = () => {
     localStorage.removeItem("token");
