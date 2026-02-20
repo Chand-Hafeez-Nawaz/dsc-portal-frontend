@@ -13,8 +13,8 @@ function AdminLogin() {
     e.preventDefault();
 
     try {
-      const res = await axios.post(
-        `${API_URL}/api/auth/login`,
+      const res = await api.post(
+        `/api/auth/login`,
         {
           email: email.trim(),     // ✅ important
           password: password.trim()
@@ -29,7 +29,8 @@ function AdminLogin() {
       }
 
     } catch (error) {
-      alert(error.response?.data?.message || "Login Failed ❌");
+      console.log(error.response);
+      alert("Login failed - check console");
     }
   };
 
