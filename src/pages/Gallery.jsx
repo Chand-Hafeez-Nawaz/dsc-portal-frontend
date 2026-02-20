@@ -54,7 +54,7 @@ function Gallery() {
 
   const fetchGallery = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/gallery");
+      const res = await axios.get("${import.meta.env.VITE_API_URL}/api/gallery");
       setUploadedImages(res.data);
       setLoading(false);
     } catch (error) {

@@ -28,7 +28,7 @@ function AdminDashboard() {
   /* ================= FETCH EVENTS ================= */
   const fetchEvents = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/events");
+      const res = await axios.get("`${import.meta.env.VITE_API_URL}/api/events`");
       setEvents(res.data);
     } catch {
       console.log("Failed to fetch events");
@@ -38,7 +38,7 @@ function AdminDashboard() {
   /* ================= FETCH GALLERY ================= */
   const fetchGallery = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/gallery");
+      const res = await axios.get("${import.meta.env.VITE_API_URL}/api/gallery");
       setGalleryImages(res.data);
     } catch {
       console.log("Failed to fetch gallery");
@@ -99,7 +99,7 @@ function AdminDashboard() {
 
     try {
       await axios.delete(
-        `http://localhost:5000/api/events/${id}`
+        `${import.meta.env.VITE_API_URL}/api/events/${id}`
       );
       fetchEvents();
     } catch {
@@ -125,7 +125,7 @@ const handleGalleryUpload = async (e) => {
 
   try {
     await axios.post(
-      "http://localhost:5000/api/gallery/upload",
+      "${import.meta.env.VITE_API_URL}/api/gallery/upload",
       formData,
       { headers: { "Content-Type": "multipart/form-data" } }
     );
@@ -147,7 +147,7 @@ const handleGalleryUpload = async (e) => {
 
     try {
       await axios.delete(
-        `http://localhost:5000/api/gallery/${id}`
+        `${import.meta.env.VITE_API_URL}/api/gallery/${id}`
       );
       fetchGallery();
     } catch {
