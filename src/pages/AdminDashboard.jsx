@@ -26,19 +26,27 @@ function AdminDashboard() {
   }, []);
 
   /* ================= FETCH EVENTS ================= */
-  const fetchEvents = async () => {
-    try {
-      const res = await axios.get("`${import.meta.env.VITE_API_URL}/api/events`");
+const fetchEvents = async () => {
+  try {
+    const res = await axios.get(
+      `${import.meta.env.VITE_API_URL}/api/events`
+    );
+
+    if (Array.isArray(res.data)) {
       setEvents(res.data);
-    } catch {
-      console.log("Failed to fetch events");
+    } else {
+      setEvents([]);
     }
-  };
+  } catch (error) {
+    console.error(error);
+    setEvents([]);
+  }
+};
 
   /* ================= FETCH GALLERY ================= */
   const fetchGallery = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/gallery");
+      const res = await axios.get("${import.meta.env.VITE_API_URL}/api/gallery");
       setGalleryImages(res.data);
     } catch {
       console.log("Failed to fetch gallery");
@@ -125,7 +133,7 @@ const handleGalleryUpload = async (e) => {
 
   try {
     await axios.post(
-      "http://localhost:5000/api/gallery/upload",
+      "${import.meta.env.VITE_API_URL}/api/gallery/upload",
       formData,
       { headers: { "Content-Type": "multipart/form-data" } }
     );
@@ -147,7 +155,7 @@ const handleGalleryUpload = async (e) => {
 
     try {
       await axios.delete(
-        `http://localhost:5000/api/gallery/${id}`
+        `${import.meta.env.VITE_API_URL}/api/gallery/${id}`
       );
       fetchGallery();
     } catch {
@@ -232,7 +240,7 @@ const handleGalleryUpload = async (e) => {
       {/* ================= EVENTS ================= */}
       <h2 className="section-title">All Events</h2>
       <div className="card-grid">
-        {events.map((event) => (
+        {Array.isArray(events) && events.map((event) => (
           <div key={event._id} className="card">
             <h3>{event.title}</h3>
             <p>{event.description}</p>
