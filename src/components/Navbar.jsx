@@ -1,10 +1,11 @@
-import React from "react";
+
 import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
+import React, { useEffect, useRef, useState } from "react";
 
 function Navbar() {
   const navigate = useNavigate();
-  const [role, setRole] = useState(localStorage.getItem("role"));
+  const role = localStorage.getItem("role");
 
   const handleLogout = () => {
     localStorage.removeItem("token");
