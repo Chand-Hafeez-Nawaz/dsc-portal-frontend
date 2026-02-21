@@ -85,14 +85,13 @@ function Events() {
             </p>
 
           {selectedEvent?.brochure && (
-  <a
-    href={selectedEvent.brochure}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="download-btn"
-  >
-    Open Brochure
-  </a>
+ <a
+  href={`https://docs.google.com/gview?url=${encodeURIComponent(event.brochure)}&embedded=true`}
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  Open Brochure
+</a>
 )}
           </div>
         </div>
