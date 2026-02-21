@@ -69,8 +69,8 @@ function Gallery() {
   );
 
     const firstThreeUploaded = uploadedImages
-    .slice(0, 3)
-    .map((img) => `${import.meta.env.VITE_API_URL}${img.image}`);
+  .slice(0, 3)
+  .map((img) => img.image);
 
   const remainingLocal = localImages.filter(
     (_, index) => ![0, 2, 4].includes(index)
@@ -78,7 +78,7 @@ function Gallery() {
 
   const remainingUploaded = uploadedImages
   .slice(3)
-  .map((img) => `${import.meta.env.VITE_API_URL}${img.image}`);
+  .map((img) => img.image);
 
   const allImages = [
     ...firstThreeLocal,

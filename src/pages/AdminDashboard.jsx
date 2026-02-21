@@ -109,11 +109,7 @@ function AdminDashboard() {
 }
 
   try {
-    await api.post("/api/gallery/upload", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    await api.post("/api/gallery/upload", formData);
 
     toast.success("Images uploaded ✅");
     setGalleryImagesToUpload([]);
