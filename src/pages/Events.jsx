@@ -86,9 +86,12 @@ function Events() {
 
           {selectedEvent?.brochure && (
  <a
-  href={`https://docs.google.com/gview?url=${encodeURIComponent(event.brochure)}&embedded=true`}
-  target="_blank"
-  rel="noopener noreferrer"
+  href={selectedEvent.brochure.replace(
+  "/upload/",
+  "/upload/fl_attachment/"
+)}
+target="_blank"
+rel="noopener noreferrer"
 >
   Open Brochure
 </a>
