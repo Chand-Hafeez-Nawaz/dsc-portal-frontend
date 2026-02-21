@@ -30,6 +30,25 @@ function Home() {
   return (
     <div>
 
+      {/* Leadership Section */}
+      <div className="officials-section" data-aos="fade-up">
+        <h2 className="section-title">Leadership</h2>
+
+        <div className="officials-grid">
+          <div className="official-card">
+            <img src={collectorImg} alt="Sri O. Anand IAS" />
+            <h3>Sri O. Anand, I.A.S</h3>
+            <p>District Collector, Anantapur</p>
+          </div>
+
+          <div className="official-card">
+            <img src={deoImg} alt="Sri M. Prasad Babu" />
+            <h3>Sri M. Prasad Babu</h3>
+            <p>District Education Officer</p>
+          </div>
+        </div>
+      </div>
+
       {/* HERO SECTION */}
       <section className="hero" data-aos="fade-up">
         <div className="hero-content">
@@ -86,24 +105,6 @@ function Home() {
   </section>
 )}
 
-      {/* Leadership Section */}
-      <div className="officials-section" data-aos="fade-up">
-        <h2 className="section-title">Leadership</h2>
-
-        <div className="officials-grid">
-          <div className="official-card">
-            <img src={collectorImg} alt="Sri O. Anand IAS" />
-            <h3>Sri O. Anand, I.A.S</h3>
-            <p>District Collector, Anantapur</p>
-          </div>
-
-          <div className="official-card">
-            <img src={deoImg} alt="Sri M. Prasad Babu" />
-            <h3>Sri M. Prasad Babu</h3>
-            <p>District Education Officer</p>
-          </div>
-        </div>
-      </div>
 
       {/* Stats Section */}
       <section className="stats-section" data-aos="fade-up">
