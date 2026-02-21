@@ -90,7 +90,7 @@ function Home() {
                 <h3>{notice.title}</h3>
 
                <a
-  href={notice.document + "?fl_attachment"}
+  href={`https://docs.google.com/gview?url=${encodeURIComponent(notice.document)}&embedded=true`}
   target="_blank"
   rel="noopener noreferrer"
   className="download-btn"

@@ -268,13 +268,12 @@ const handleDeleteNotice = async (id) => {
 
             {event.brochure && (
   <a
-    href={event.brochure}
-    target="_blank"
-    rel="noreferrer"
-    className="download-btn"
-  >
-    Open Brochure
-  </a>
+  href={`${event.brochure}?fl_attachment=true`}
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  Download Brochure
+</a>
 )}
 
             <div className="action-buttons">
