@@ -107,18 +107,25 @@
   text-align: center;
 }
 
+.notice-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
 .notice-card {
   background: #ffffff;
-  padding: 20px;
-  margin: 15px auto;
-  max-width: 600px;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+  text-align: center;
   transition: transform 0.2s ease;
 }
 
 .notice-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
 }
 
 .notice-card h3 {
