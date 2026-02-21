@@ -84,16 +84,16 @@ function Events() {
               {selectedEvent.description}
             </p>
 
-            {selectedEvent.brochure && (
-              <a
-                href={`${selectedEvent.brochure}`}
-                target="_blank"
-                rel="noreferrer"
-                className="modal-download-btn"
-              >
-                Download Brochure
-              </a>
-            )}
+          {selectedEvent?.brochure && (
+  <a
+    href={selectedEvent.brochure}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="download-btn"
+  >
+    Open Brochure
+  </a>
+)}
           </div>
         </div>
       )}
