@@ -9,7 +9,7 @@ import api from "../utils/axiosConfig";
 function Home() {
   const [notices, setNotices] = useState([]);
   const [showMore, setShowMore] = useState(false);
-
+  const [selectedImage, setSelectedImage] = useState(null);
   useEffect(() => {
     fetchNotices();
   }, []);
@@ -28,7 +28,8 @@ function Home() {
 
       {/* ===== TOP LEADERSHIP STRIP ===== */}
       <section className="top-leadership">
-        <div className="official-block left">
+        <div className="official-block left"
+         onClick={() => setSelectedImage(collectorImg)}>
           <img src={collectorImg} alt="Collector" />
           <div>
             <h4>Sri O. Anand, I.A.S</h4>
@@ -36,7 +37,8 @@ function Home() {
           </div>
         </div>
 
-        <div className="official-block right">
+        <div className="official-block right"
+        onClick={() => setSelectedImage(deoImg)}>
           <img src={deoImg} alt="DEO" />
           <div>
             <h4>Sri M. Prasad Babu</h4>
@@ -130,7 +132,14 @@ function Home() {
           </p>
         </div>
       </section>
-
+      {selectedImage && (
+  <div
+    className="image-modal"
+    onClick={() => setSelectedImage(null)}
+  >
+    <img src={selectedImage} alt="Expanded" />
+  </div>
+)}
     </div>
   );
 }

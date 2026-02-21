@@ -11,48 +11,68 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 60px;
-  background: #ffffff;
-  border-bottom: 1px solid #e5e5e5;
-  flex-wrap: wrap;
+  padding: 20px 60px;
+  background: linear-gradient(135deg, #1c3c6b, #2e5fa3);
+  color: white;
 }
 
 .official-block {
   display: flex;
   align-items: center;
   gap: 15px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.official-block:hover {
+  transform: scale(1.05);
 }
 
 .official-block img {
-  width: 85px;
-  height: 85px;
+  width: 90px;
+  height: 90px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 50%;
+  border: 3px solid white;
+  transition: 0.3s ease;
+}
+
+.official-block img:hover {
+  box-shadow: 0 0 20px rgba(255,255,255,0.6);
 }
 
 .official-block h4 {
   margin: 0;
   font-size: 16px;
-  color: #1c3c6b;
+  color: white;
 }
 
 .official-block p {
   margin: 0;
   font-size: 13px;
-  color: #555;
+  opacity: 0.9;
 }
 
 /* ================= HERO SECTION ================= */
 
 .hero {
-  height: 90vh;
-  background: url("../assets/dsc-building.jpg") no-repeat center center;
-  background-size: cover;
+  height: 100vh;
+  background: url("../assets/dsc-building.jpg") center/cover no-repeat fixed;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
+  animation: slowZoom 20s ease-in-out infinite alternate;
+}
+
+@keyframes slowZoom {
+  from {
+    background-size: 100%;
+  }
+  to {
+    background-size: 110%;
+  }
 }
 
 .hero::before {
