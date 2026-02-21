@@ -51,48 +51,40 @@ function Home() {
       </section>
 
       {/* 🔥 NOTICE BOARD SECTION */}
-      {notices.length > 0 && (
-        <section className="notice-section" data-aos="fade-up">
-          <h2 className="section-title">Notice Board</h2>
+{notices.length > 0 && (
+  <section className="notice-section" data-aos="fade-up">
+    <h2 className="section-title">Notice Board</h2>
 
-          <div className="notice-card">
-            <h3>{firstNotice.title}</h3>
-            <a
-              href={firstNotice.document}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="download-btn"
-            >
-              Open Circular
-            </a>
-          </div>
+    <div className="notice-grid">
+      {(showMore ? notices : notices.slice(0, 3)).map((notice) => (
+        <div key={notice._id} className="notice-card">
+          <h3>{notice.title}</h3>
 
-          {showMore &&
-            remainingNotices.map((notice) => (
-              <div key={notice._id} className="notice-card">
-                <h3>{notice.title}</h3>
-                <a
-                  href={`https://docs.google.com/gview?url=${encodeURIComponent(notice.document)}&embedded=true`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="download-btn"
-                >
-                  Open Circular
-                </a>
-              </div>
-            ))}
+          <a
+            href={`https://docs.google.com/gview?url=${encodeURIComponent(
+              notice.document
+            )}&embedded=true`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="download-btn"
+          >
+            Open Circular
+          </a>
+        </div>
+      ))}
+    </div>
 
-          {remainingNotices.length > 0 && (
-            <button
-              className="gov-btn"
-              onClick={() => setShowMore(!showMore)}
-              style={{ marginTop: "20px" }}
-            >
-              {showMore ? "Show Less" : "Show More"}
-            </button>
-          )}
-        </section>
-      )}
+    {notices.length > 3 && (
+      <button
+        className="gov-btn"
+        onClick={() => setShowMore(!showMore)}
+        style={{ marginTop: "30px" }}
+      >
+        {showMore ? "Show Previous" : "Show More"}
+      </button>
+    )}
+  </section>
+)}
 
       {/* Leadership Section */}
       <div className="officials-section" data-aos="fade-up">

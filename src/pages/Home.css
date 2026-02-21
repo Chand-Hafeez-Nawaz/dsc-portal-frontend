@@ -101,36 +101,88 @@
   animation-delay: 1s;
 }
 
+/* ================= NOTICE SECTION ================= */
+
 .notice-section {
-  padding: 60px 20px;
+  padding: 70px 20px;
   background: #f4f8ff;
   text-align: center;
 }
 
+.notice-section .section-title {
+  margin-bottom: 40px;
+}
+
+/* GRID LAYOUT */
+
 .notice-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 25px;
-  max-width: 1000px;
+  grid-template-columns: repeat(3, 1fr); /* 3 per row */
+  gap: 30px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
+/* NOTICE CARD */
+
 .notice-card {
   background: #ffffff;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+  padding: 30px 20px;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
   text-align: center;
-  transition: transform 0.2s ease;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .notice-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-6px);
 }
 
 .notice-card h3 {
-  margin-bottom: 10px;
+  margin-bottom: 18px;
   color: #1c3c6b;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* BUTTON */
+
+.notice-card .download-btn {
+  display: inline-block;
+  padding: 8px 18px;
+  background: #1c3c6b;
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background 0.2s ease;
+}
+
+.notice-card .download-btn:hover {
+  background: #142a4d;
+}
+
+/* SHOW MORE BUTTON */
+
+.notice-section .gov-btn {
+  margin-top: 40px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 992px) {
+  .notice-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 per row on tablet */
+  }
+}
+
+@media (max-width: 600px) {
+  .notice-grid {
+    grid-template-columns: 1fr; /* 1 per row on mobile */
+  }
 }
 
 .download-btn {
