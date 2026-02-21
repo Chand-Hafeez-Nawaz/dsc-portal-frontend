@@ -24,6 +24,7 @@ function AdminDashboard() {
   const [noticeTitle, setNoticeTitle] = useState("");
   const [noticeFile, setNoticeFile] = useState(null);
   const [noticeKey, setNoticeKey] = useState(Date.now());
+  const [noticeEditId, setNoticeEditId] = useState(null);
 
   useEffect(() => {
     fetchEvents();
@@ -46,17 +47,24 @@ const handleNoticeSubmit = async (e) => {
 
   const formData = new FormData();
   formData.append("title", noticeTitle);
-  formData.append("document", noticeFile);
+  if (noticeFile) formData.append("document", noticeFile);
 
   try {
-    await api.post("/api/notices", formData);
-    toast.success("Notice uploaded ✅");
+    if (noticeEditId) {
+      await api.put(`/api/notices/${noticeEditId}`, formData);
+      toast.success("Notice updated ✅");
+    } else {
+      await api.post("/api/notices", formData);
+      toast.success("Notice uploaded ✅");
+    }
+
     setNoticeTitle("");
     setNoticeFile(null);
+    setNoticeEditId(null);
     setNoticeKey(Date.now());
     fetchNotices();
   } catch (error) {
-    toast.error("Notice upload failed ❌");
+    toast.error("Notice operation failed ❌");
   }
 };
 
@@ -309,11 +317,11 @@ const handleDeleteNotice = async (id) => {
     />
 
     <input
-      key={noticeKey}
-      type="file"
-      onChange={(e) => setNoticeFile(e.target.files[0])}
-      required
-    />
+  key={noticeKey}
+  type="file"
+  onChange={(e) => setNoticeFile(e.target.files[0])}
+  required={!noticeEditId}
+/>
 
     <button className="gov-btn">Upload Circular</button>
   </form>
@@ -325,7 +333,9 @@ const handleDeleteNotice = async (id) => {
       <h3>{notice.title}</h3>
 
       <a
-        href={notice.document}
+        href={`https://docs.google.com/gview?url=${encodeURIComponent(
+          notice.document
+        )}&embedded=true`}
         target="_blank"
         rel="noopener noreferrer"
         className="download-btn"
@@ -333,12 +343,24 @@ const handleDeleteNotice = async (id) => {
         Open Circular
       </a>
 
-      <button
-        className="delete-btn"
-        onClick={() => handleDeleteNotice(notice._id)}
-      >
-        Delete
-      </button>
+      <div className="action-buttons">
+        <button
+          className="edit-btn"
+          onClick={() => {
+            setNoticeTitle(notice.title);
+            setNoticeEditId(notice._id);
+          }}
+        >
+          Edit
+        </button>
+
+        <button
+          className="delete-btn"
+          onClick={() => handleDeleteNotice(notice._id)}
+        >
+          Delete
+        </button>
+      </div>
     </div>
   ))}
 </div>

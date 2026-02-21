@@ -101,6 +101,45 @@
   animation-delay: 1s;
 }
 
+.notice-section {
+  padding: 60px 20px;
+  background: #f4f8ff;
+  text-align: center;
+}
+
+.notice-card {
+  background: #ffffff;
+  padding: 20px;
+  margin: 15px auto;
+  max-width: 600px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease;
+}
+
+.notice-card:hover {
+  transform: translateY(-4px);
+}
+
+.notice-card h3 {
+  margin-bottom: 10px;
+  color: #1c3c6b;
+}
+
+.download-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  background: #1c3c6b;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.download-btn:hover {
+  background: #163154;
+}
+
 @keyframes fadeUp {
   from {
     opacity: 0;

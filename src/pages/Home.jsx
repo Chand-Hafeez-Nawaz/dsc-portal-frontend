@@ -72,7 +72,7 @@ function Home() {
               <div key={notice._id} className="notice-card">
                 <h3>{notice.title}</h3>
                 <a
-                  href={notice.document}
+                  href={`https://docs.google.com/gview?url=${encodeURIComponent(notice.document)}&embedded=true`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="download-btn"
