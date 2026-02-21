@@ -14,6 +14,24 @@
   font-weight: 700;
 }
 
+.brochure-btn {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #1c3c6b, #2b5ca8);
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.brochure-btn:hover {
+  background: linear-gradient(135deg, #16325a, #244d91);
+  transform: translateY(-2px);
+}
+
 /* ================= GRID ================= */
 
 .events-grid {

@@ -92,6 +92,7 @@ function Events() {
 )}
 target="_blank"
 rel="noopener noreferrer"
+className="brochure-btn"
 >
   Open Brochure
 </a>
