@@ -147,6 +147,7 @@ function Home() {
         </div>
       </section>
       {/* OFFICIAL MODAL */}
+{/* OFFICIAL MODAL */}
 {selectedOfficial && (
   <div
     className="official-modal-overlay"
@@ -156,16 +157,14 @@ function Home() {
       className="official-modal-card"
       onClick={(e) => e.stopPropagation()}
     >
-      <img src={selectedOfficial.img} alt="Official" />
-      <h2>{selectedOfficial.name}</h2>
-      <p>{selectedOfficial.role}</p>
+      <div className="official-modal-image">
+        <img src={selectedOfficial.img} alt="Official" />
+      </div>
 
-      <button
-        className="close-btn"
-        onClick={() => setSelectedOfficial(null)}
-      >
-        Close
-      </button>
+      <div className="official-modal-content">
+        <h2>{selectedOfficial.name}</h2>
+        <p>{selectedOfficial.role}</p>
+      </div>
     </div>
   </div>
 )}
