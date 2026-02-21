@@ -9,7 +9,7 @@ import api from "../utils/axiosConfig";
 function Home() {
   const [notices, setNotices] = useState([]);
   const [showMore, setShowMore] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedOfficial, setSelectedOfficial] = useState(null);
   useEffect(() => {
     fetchNotices();
   }, []);
@@ -28,23 +28,37 @@ function Home() {
 
       {/* ===== TOP LEADERSHIP STRIP ===== */}
       <section className="top-leadership">
-        <div className="official-block left"
-         onClick={() => setSelectedImage(collectorImg)}>
-          <img src={collectorImg} alt="Collector" />
-          <div>
-            <h4>Sri O. Anand, I.A.S</h4>
-            <p>District Collector, Anantapur</p>
-          </div>
-        </div>
+        <div className="official-block" onClick={() =>
+    setSelectedOfficial({
+      img: collectorImg,
+      name: "Sri O. Anand, I.A.S",
+      role: "District Collector, Anantapur",
+    })
+  }
+>
+  <img src={collectorImg} alt="Collector" />
+  <div>
+    <h4>Sri O. Anand, I.A.S</h4>
+    <p>District Collector, Anantapur</p>
+  </div>
+</div>
 
-        <div className="official-block right"
-        onClick={() => setSelectedImage(deoImg)}>
-          <img src={deoImg} alt="DEO" />
-          <div>
-            <h4>Sri M. Prasad Babu</h4>
-            <p>District Education Officer</p>
-          </div>
-        </div>
+        <div
+  className="official-block"
+  onClick={() =>
+    setSelectedOfficial({
+      img: deoImg,
+      name: "Sri M. Prasad Babu",
+      role: "District Education Officer",
+    })
+  }
+>
+  <img src={deoImg} alt="DEO" />
+  <div>
+    <h4>Sri M. Prasad Babu</h4>
+    <p>District Education Officer</p>
+  </div>
+</div>
       </section>
 
       {/* ===== HERO SECTION ===== */}
@@ -132,12 +146,27 @@ function Home() {
           </p>
         </div>
       </section>
-      {selectedImage && (
+      {/* OFFICIAL MODAL */}
+{selectedOfficial && (
   <div
-    className="image-modal"
-    onClick={() => setSelectedImage(null)}
+    className="official-modal-overlay"
+    onClick={() => setSelectedOfficial(null)}
   >
-    <img src={selectedImage} alt="Expanded" />
+    <div
+      className="official-modal-card"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <img src={selectedOfficial.img} alt="Official" />
+      <h2>{selectedOfficial.name}</h2>
+      <p>{selectedOfficial.role}</p>
+
+      <button
+        className="close-btn"
+        onClick={() => setSelectedOfficial(null)}
+      >
+        Close
+      </button>
+    </div>
   </div>
 )}
     </div>
