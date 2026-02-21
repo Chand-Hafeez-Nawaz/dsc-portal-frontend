@@ -1,12 +1,19 @@
-/* ===== TOP LEADERSHIP STRIP ===== */
+/* ================= GLOBAL ================= */
+
+.home-wrapper {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* ================= TOP LEADERSHIP STRIP ================= */
 
 .top-leadership {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 60px;
+  padding: 18px 60px;
   background: #ffffff;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e5e5e5;
   flex-wrap: wrap;
 }
 
@@ -20,7 +27,7 @@
   width: 85px;
   height: 85px;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 .official-block h4 {
@@ -35,11 +42,12 @@
   color: #555;
 }
 
-/* ===== HERO SECTION ===== */
+/* ================= HERO SECTION ================= */
 
 .hero {
-  height: 85vh;
-  background: url("../assets/dsc-building.jpg") center/cover no-repeat;
+  height: 90vh;
+  background: url("../assets/dsc-building.jpg") no-repeat center center;
+  background-size: cover;
   position: relative;
   display: flex;
   align-items: center;
@@ -51,21 +59,239 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.55),
+    rgba(0, 0, 0, 0.75)
+  );
 }
 
 .hero-content {
   position: relative;
   color: white;
   max-width: 900px;
+  padding: 20px;
 }
 
 .hero-content h1 {
-  font-size: 48px;
+  font-size: 52px;
   margin-bottom: 20px;
+  font-weight: 700;
 }
 
 .hero-content p {
   font-size: 20px;
   margin-bottom: 30px;
+  opacity: 0.9;
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+}
+
+/* BUTTONS */
+
+.primary-btn,
+.secondary-btn {
+  padding: 14px 30px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  color: white;
+}
+
+.primary-btn {
+  background: #1c3c6b;
+}
+
+.primary-btn:hover {
+  background: #142a4d;
+  transform: translateY(-4px);
+}
+
+.secondary-btn {
+  background: transparent;
+  border: 2px solid white;
+}
+
+.secondary-btn:hover {
+  background: #1c3c6b;
+  transform: translateY(-4px);
+}
+
+/* ================= NOTICE SECTION ================= */
+
+.notice-section {
+  padding: 70px 20px;
+  background: #f4f8ff;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 28px;
+  color: #1c3c6b;
+  margin-bottom: 40px;
+}
+
+.section-title::after {
+  content: "";
+  width: 80px;
+  height: 4px;
+  background: gold;
+  display: block;
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
+.notice-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.notice-card {
+  background: white;
+  padding: 30px 20px;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  transition: all 0.25s ease;
+}
+
+.notice-card:hover {
+  transform: translateY(-6px);
+}
+
+.notice-card h3 {
+  margin-bottom: 18px;
+  color: #1c3c6b;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.download-btn {
+  display: inline-block;
+  padding: 8px 18px;
+  background: #1c3c6b;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.2s ease;
+}
+
+.download-btn:hover {
+  background: #142a4d;
+}
+
+.gov-btn {
+  padding: 10px 25px;
+  background: #1c3c6b;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.gov-btn:hover {
+  background: #142a4d;
+}
+
+/* ================= STATS SECTION ================= */
+
+.stats-section {
+  padding: 70px 10%;
+  background: #eef4ff;
+}
+
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  text-align: center;
+}
+
+.stat-box {
+  background: white;
+  padding: 40px 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  transition: 0.3s ease;
+}
+
+.stat-box:hover {
+  transform: translateY(-6px);
+}
+
+.stat-box h2 {
+  font-size: 40px;
+  color: #1e3c72;
+  margin-bottom: 10px;
+}
+
+.stat-box p {
+  font-size: 16px;
+  color: #555;
+}
+
+/* ================= ABOUT SECTION ================= */
+
+.about-preview {
+  padding: 80px 10%;
+  background: linear-gradient(135deg, #eef2f7, #dbe7ff);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.about-text-full {
+  max-width: 900px;
+  background: white;
+  padding: 50px;
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.about-text-full h2 {
+  font-size: 32px;
+  margin-bottom: 25px;
+  color: #0b3d91;
+}
+
+.about-text-full p {
+  font-size: 18px;
+  line-height: 1.8;
+  color: #444;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 992px) {
+  .notice-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .top-leadership {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .notice-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-content h1 {
+    font-size: 36px;
+  }
+
+  .hero-content p {
+    font-size: 16px;
+  }
 }
