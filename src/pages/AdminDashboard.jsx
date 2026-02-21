@@ -20,10 +20,52 @@ function AdminDashboard() {
   const [fileKey, setFileKey] = useState(Date.now());
   const [galleryKey, setGalleryKey] = useState(Date.now());
 
+  const [notices, setNotices] = useState([]);
+  const [noticeTitle, setNoticeTitle] = useState("");
+  const [noticeFile, setNoticeFile] = useState(null);
+  const [noticeKey, setNoticeKey] = useState(Date.now());
+
   useEffect(() => {
     fetchEvents();
     fetchGallery();
+    fetchNotices();
   }, []);
+
+ /* ================= NOTICE ================= */
+const fetchNotices = async () => {
+  try {
+    const res = await api.get("/api/notices");
+    setNotices(res.data || []);
+  } catch (error) {
+    console.error("Notice fetch error:", error);
+  }
+};
+
+const handleNoticeSubmit = async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData();
+  formData.append("title", noticeTitle);
+  formData.append("document", noticeFile);
+
+  try {
+    await api.post("/api/notices", formData);
+    toast.success("Notice uploaded ✅");
+    setNoticeTitle("");
+    setNoticeFile(null);
+    setNoticeKey(Date.now());
+    fetchNotices();
+  } catch (error) {
+    toast.error("Notice upload failed ❌");
+  }
+};
+
+const handleDeleteNotice = async (id) => {
+  if (!window.confirm("Delete this notice?")) return;
+
+  await api.delete(`/api/notices/${id}`);
+  fetchNotices();
+};
 
   /* ================= FETCH EVENTS ================= */
   const fetchEvents = async () => {
@@ -251,6 +293,56 @@ function AdminDashboard() {
         ))}
       </div>
 
+
+<h2 className="section-title">Notice Board</h2>
+
+<div className="create-card">
+  <h2>Upload Circular</h2>
+
+  <form onSubmit={handleNoticeSubmit}>
+    <input
+      type="text"
+      placeholder="Circular Title"
+      value={noticeTitle}
+      onChange={(e) => setNoticeTitle(e.target.value)}
+      required
+    />
+
+    <input
+      key={noticeKey}
+      type="file"
+      onChange={(e) => setNoticeFile(e.target.files[0])}
+      required
+    />
+
+    <button className="gov-btn">Upload Circular</button>
+  </form>
+</div>
+
+<div className="card-grid">
+  {notices.map((notice) => (
+    <div key={notice._id} className="card">
+      <h3>{notice.title}</h3>
+
+      <a
+        href={notice.document}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="download-btn"
+      >
+        Open Circular
+      </a>
+
+      <button
+        className="delete-btn"
+        onClick={() => handleDeleteNotice(notice._id)}
+      >
+        Delete
+      </button>
+    </div>
+  ))}
+</div>
+        
       {/* ================= GALLERY ================= */}
       <h2 className="section-title">Gallery</h2>
 
