@@ -124,9 +124,10 @@ const handleDeleteNotice = async (id) => {
       setFileKey(Date.now());
       fetchEvents();
     } catch (error) {
-      console.error("Event save error:", error);
-      toast.error("Event operation failed ❌");
-    }
+  console.error("FULL ERROR:", error);
+  console.error("RESPONSE:", error.response?.data);
+  toast.error(error.response?.data?.message || "Event operation failed ❌");
+}
   };
 
   /* ================= DELETE EVENT ================= */
