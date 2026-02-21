@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import api from "../utils/axiosConfig";
 
 function Home() {
-
   const [notices, setNotices] = useState([]);
   const [showMore, setShowMore] = useState(false);
 
@@ -24,40 +23,35 @@ function Home() {
     }
   };
 
-  const firstNotice = notices[0];
-  const remainingNotices = notices.slice(1);
-
   return (
-    <div>
+    <div className="home-wrapper">
 
-      {/* Leadership Section */}
-      <div className="officials-section" data-aos="fade-up">
-        <h2 className="section-title">Leadership</h2>
-
-        <div className="officials-grid">
-          <div className="official-card">
-            <img src={collectorImg} alt="Sri O. Anand IAS" />
-            <h3>Sri O. Anand, I.A.S</h3>
+      {/* ===== TOP LEADERSHIP STRIP ===== */}
+      <section className="top-leadership">
+        <div className="official-block left">
+          <img src={collectorImg} alt="Collector" />
+          <div>
+            <h4>Sri O. Anand, I.A.S</h4>
             <p>District Collector, Anantapur</p>
           </div>
+        </div>
 
-          <div className="official-card">
-            <img src={deoImg} alt="Sri M. Prasad Babu" />
-            <h3>Sri M. Prasad Babu</h3>
+        <div className="official-block right">
+          <img src={deoImg} alt="DEO" />
+          <div>
+            <h4>Sri M. Prasad Babu</h4>
             <p>District Education Officer</p>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* HERO SECTION */}
+      {/* ===== HERO SECTION ===== */}
       <section className="hero" data-aos="fade-up">
         <div className="hero-content">
-          <h1 className="fade-in">District Science Centre</h1>
-          <p className="fade-in delay">
-            Empowering Innovation & Scientific Temper
-          </p>
+          <h1>District Science Centre</h1>
+          <p>Empowering Innovation & Scientific Temper</p>
 
-          <div className="hero-buttons fade-in delay2">
+          <div className="hero-buttons">
             <Link to="/events" className="primary-btn">
               Explore Events
             </Link>
@@ -69,45 +63,42 @@ function Home() {
         </div>
       </section>
 
-      {/* 🔥 NOTICE BOARD SECTION */}
-{notices.length > 0 && (
-  <section className="notice-section" data-aos="fade-up">
-    <h2 className="section-title">Notice Board</h2>
+      {/* ===== NOTICE BOARD ===== */}
+      {notices.length > 0 && (
+        <section className="notice-section">
+          <h2 className="section-title">Notice Board</h2>
 
-    <div className="notice-grid">
-      {(showMore ? notices : notices.slice(0, 3)).map((notice) => (
-        <div key={notice._id} className="notice-card">
-          <h3>{notice.title}</h3>
+          <div className="notice-grid">
+            {(showMore ? notices : notices.slice(0, 3)).map((notice) => (
+              <div key={notice._id} className="notice-card">
+                <h3>{notice.title}</h3>
 
-          <a
-            href={`https://docs.google.com/gview?url=${encodeURIComponent(
-              notice.document
-            )}&embedded=true`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="download-btn"
-          >
-            Open Circular
-          </a>
-        </div>
-      ))}
-    </div>
+                <a
+                  href={notice.document}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="download-btn"
+                >
+                  Open Circular
+                </a>
+              </div>
+            ))}
+          </div>
 
-    {notices.length > 3 && (
-      <button
-        className="gov-btn"
-        onClick={() => setShowMore(!showMore)}
-        style={{ marginTop: "30px" }}
-      >
-        {showMore ? "Show Previous" : "Show More"}
-      </button>
-    )}
-  </section>
-)}
+          {notices.length > 3 && (
+            <button
+              className="gov-btn"
+              onClick={() => setShowMore(!showMore)}
+              style={{ marginTop: "30px" }}
+            >
+              {showMore ? "Show Previous" : "Show More"}
+            </button>
+          )}
+        </section>
+      )}
 
-
-      {/* Stats Section */}
-      <section className="stats-section" data-aos="fade-up">
+      {/* ===== STATS ===== */}
+      <section className="stats-section">
         <div className="stats-container">
           <div className="stat-box">
             <h2>500+</h2>
@@ -128,7 +119,7 @@ function Home() {
         </div>
       </section>
 
-      {/* About Section */}
+      {/* ===== ABOUT ===== */}
       <section className="about-preview">
         <div className="about-text-full">
           <h2>About District Science Centre</h2>
