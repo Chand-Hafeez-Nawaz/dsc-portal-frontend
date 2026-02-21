@@ -269,12 +269,11 @@ const handleDeleteNotice = async (id) => {
             {event.brochure && (
   <a
     href={event.brochure}
-    download={event.brochure.split("/").pop()}
     target="_blank"
     rel="noreferrer"
     className="download-btn"
   >
-    Download Brochure
+    Open Brochure
   </a>
 )}
 
