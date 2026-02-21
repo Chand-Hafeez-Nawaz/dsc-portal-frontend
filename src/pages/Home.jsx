@@ -89,14 +89,14 @@ function Home() {
               <div key={notice._id} className="notice-card">
                 <h3>{notice.title}</h3>
 
-                <a
-                  href={notice.document}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="download-btn"
-                >
-                  Open Circular
-                </a>
+               <a
+  href={notice.document + "?fl_attachment"}
+  target="_blank"
+  rel="noopener noreferrer"
+  className="download-btn"
+>
+  Open Circular
+</a>
               </div>
             ))}
           </div>
