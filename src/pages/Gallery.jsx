@@ -81,11 +81,10 @@ function Gallery() {
   .map((img) => img.image);
 
   const allImages = [
-    ...firstThreeLocal,
-    ...firstThreeUploaded,
-    ...remainingLocal,
-    ...remainingUploaded,
-  ];
+  localImages[0],            // first local image
+  ...uploadedImages.map(img => img.image), // all uploaded images newest first
+  ...localImages.slice(1),   // remaining local images
+];
 
   /* ================= NAVIGATION ================= */
 

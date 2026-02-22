@@ -30,7 +30,7 @@ function Launch() {
         <h3 className="launch-collector">
           Sri O. Anand, I.A.S
         </h3>
-
+        <p className="honor">Honorable</p>
         <p className="launch-role">
           District Collector, Anantapur
         </p>

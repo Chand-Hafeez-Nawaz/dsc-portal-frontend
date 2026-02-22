@@ -39,6 +39,7 @@ function Home() {
   <img src={collectorImg} alt="Collector" />
   <div>
     <h4>Sri O. Anand, I.A.S</h4>
+    <h5>Honorable</h5>
     <p>District Collector, Anantapur</p>
   </div>
 </div>
@@ -56,6 +57,7 @@ function Home() {
   <img src={deoImg} alt="DEO" />
   <div>
     <h4>Sri M. Prasad Babu</h4>
+    <h5>Honorable</h5>
     <p>District Education Officer</p>
   </div>
 </div>
