@@ -7,7 +7,7 @@
   background: linear-gradient(90deg, #0b3d91, #0a2f6b);
   padding: 14px 0;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 1000;
 }

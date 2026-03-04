@@ -8,13 +8,22 @@
 /* ================= TOP LEADERSHIP STRIP ================= */
 
 .top-leadership {
+  position: fixed;
+  top: 60px; /* navbar height */
+
+  width: 100%;
+  left: 0;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 80px;
+
+  padding: 15px 80px;
   background: linear-gradient(135deg, #eef2f7, #dbe7ff);
   color: #0b3d91;
-  
+
+  z-index: 999;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
 .official-block {
@@ -58,6 +67,7 @@
 
 .hero {
   height: 100vh;
+  margin-top: 140px;
   background: url("../assets/dsc-building.jpg") center/cover no-repeat fixed;
   position: relative;
   display: flex;
@@ -126,11 +136,12 @@
 }
 
 .primary-btn {
-  background: #1c3c6b;
+  background: transparent;
+  border: 2px solid white;
 }
 
 .primary-btn:hover {
-  background: #142a4d;
+  background: #1c3c6b;
   transform: translateY(-4px);
 }
 
