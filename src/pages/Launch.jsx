@@ -28,11 +28,11 @@ function Launch() {
         </p>
 
         <h3 className="launch-collector">
-          Sri O. Anand, I.A.S
+          Sri M. Prasad Babu
         </h3>
         <p className="honor">Honorable</p>
         <p className="launch-role">
-          District Collector, Anantapur
+          District Education Officer, Anantapur
         </p>
 
         <button className="launch-btn" onClick={handleLaunch}>
