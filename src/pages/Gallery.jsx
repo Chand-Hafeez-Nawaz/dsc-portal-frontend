@@ -51,16 +51,17 @@ function Gallery() {
 
   /* ================= FETCH GALLERY ================= */
 
-  const fetchGallery = async () => {
-    try {
-      const res = await api.get("/api/gallery");
-      setUploadedImages(res.data || []);
-      setLoading(false);
-    } catch (error) {
-      console.log("Error fetching gallery", error);
-      setLoading(false);
-    }
-  };
+const fetchGallery = async () => {
+  try {
+    const res = await api.get("/api/gallery");
+    console.log("DATA FROM BACKEND:", res.data); // debug
+    setUploadedImages(res.data || []);
+    setLoading(false);
+  } catch (error) {
+    console.log("Error fetching gallery", error);
+    setLoading(false);
+  }
+};
 
   /* ================= IMAGE ORDER LOGIC ================= */
 
@@ -80,10 +81,18 @@ function Gallery() {
   .slice(3)
   .map((img) => img.image);
 
-  const allImages = [
-  localImages[0],            // first local image
-  ...uploadedImages.map(img => img.image), // all uploaded images newest first
-  ...localImages.slice(1),   // remaining local images
+ const allImages = [
+  { image: localImages[0], description: "" },
+
+  ...uploadedImages.map(img => ({
+    image: img.image,
+    description: img.description || "",
+  })),
+
+  ...localImages.slice(1).map(img => ({
+    image: img,
+    description: "",
+  })),
 ];
 
   /* ================= NAVIGATION ================= */
@@ -110,17 +119,17 @@ function Gallery() {
         <Loader />
       ) : (
         <div className="gallery-grid">
-          {allImages.map((img, index) => (
-            <div key={index} className="gallery-card">
-              <img
-                src={img}
-                alt="gallery"
-                className="gallery-img"
-                onClick={() => setSelectedIndex(index)}
-              />
-            </div>
-          ))}
-        </div>
+  {allImages.map((img, index) => (
+    <div key={index} className="gallery-card">
+      <img
+        src={img.image}
+        alt="gallery"
+        className="gallery-img"
+        onClick={() => setSelectedIndex(index)}
+      />
+    </div>
+  ))}
+</div>
       )}
 
       {selectedIndex !== null && (
@@ -146,11 +155,10 @@ function Gallery() {
           </span>
 
           <img
-            src={allImages[selectedIndex]}
-            alt="Full"
-            className="modal-image"
-            onClick={(e) => e.stopPropagation()}
-          />
+  src={allImages[selectedIndex]?.image}
+  alt="Full"
+  className="modal-image"
+/>
 
           <span
             className="next-btn"

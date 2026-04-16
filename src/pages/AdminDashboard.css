@@ -3,6 +3,7 @@
 /* ============================= */
 
 .admin-dashboard {
+  margin-top: 80px;
   padding: 40px;
   background: linear-gradient(135deg, #eef2f7, #dbe7ff);
   min-height: 100vh;

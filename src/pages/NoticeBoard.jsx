@@ -21,13 +21,13 @@ function NoticeBoard() {
         <div key={notice._id} style={{ marginBottom: "20px" }}>
           <h4>{notice.title}</h4>
 
-          <a
-            href={notice.document}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Open Circular
-          </a>
+         <a
+  href={`${notice.document}?fl_attachment=true`}
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  Open Circular
+</a>
         </div>
       ))}
     </div>

@@ -34,7 +34,9 @@ function Launch() {
         <p className="launch-role">
           District Education Officer, Anantapur
         </p>
-
+        <h3 className="launch-collector">
+          C.A.PUSHPA CEO AGHASTHYA FOUNDATION KUPPAM
+        </h3>
         <button className="launch-btn" onClick={handleLaunch}>
           🚀 Launch Portal
         </button>

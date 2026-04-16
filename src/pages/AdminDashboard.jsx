@@ -63,9 +63,11 @@ const handleNoticeSubmit = async (e) => {
     setNoticeEditId(null);
     setNoticeKey(Date.now());
     fetchNotices();
-  } catch (error) {
-    toast.error("Notice operation failed ❌");
-  }
+  }catch (error) {
+  console.error("FULL ERROR:", error);
+  console.error("RESPONSE:", error.response?.data);
+  toast.error(error.response?.data?.message || "Notice failed ❌");
+}
 };
 
 const handleDeleteNotice = async (id) => {
@@ -131,60 +133,63 @@ const handleDeleteNotice = async (id) => {
   };
 
   /* ================= DELETE EVENT ================= */
-  const handleDeleteEvent = async (id) => {
-    if (!window.confirm("Delete this event?")) return;
+const handleDeleteEvent = async (id) => {
+  if (!window.confirm("Delete this event?")) return;
 
-    try {
-      await api.delete(`/api/events/${id}`);
-      toast.success("Event deleted ✅");
-      fetchEvents();
-    } catch (error) {
-      console.error("Delete error:", error);
-      toast.error("Delete failed ❌");
-    }
-  };
+  try {
+    console.log("Deleting ID:", id); // 👈 DEBUG
+
+    await api.delete(`/api/events/${id}`);
+
+    toast.success("Event deleted ✅");
+    fetchEvents();
+  } catch (error) {
+    console.error("FULL ERROR:", error);
+    console.error("RESPONSE:", error.response?.data);
+    toast.error(error.response?.data?.message || "Delete failed ❌");
+  }
+};
 
   /* ================= GALLERY UPLOAD ================= */
   const handleGalleryUpload = async (e) => {
   e.preventDefault();
 
-  if (!galleryImagesToUpload.length) {
-    toast.warning("Select images first");
-    return;
-  }
-
-  const formData = new FormData();
-
-  for (let i = 0; i < galleryImagesToUpload.length; i++) {
-  formData.append("images", galleryImagesToUpload[i]); // ✅ must match backend
-}
-
+const formData = new FormData();
+    console.log("DESCRIPTIONS SENT:", descriptions);
+// send images
+galleryImagesToUpload.forEach((file) => {
+  formData.append("images", file);
+});
   try {
     await api.post("/api/gallery/upload", formData);
-
     toast.success("Images uploaded ✅");
+
     setGalleryImagesToUpload([]);
-    setGalleryKey(Date.now());
+    setDescriptions([]);
     fetchGallery();
   } catch (error) {
-    console.error("Upload Error:", error.response?.data || error.message);
-    toast.error("Gallery upload failed ❌");
+    console.error(error);
+    toast.error("Upload failed ❌");
   }
 };
 
   /* ================= DELETE IMAGE ================= */
-  const handleDeleteImage = async (id) => {
-    if (!window.confirm("Delete this image?")) return;
+const handleDeleteImage = async (id) => {
+  if (!window.confirm("Delete this image?")) return;
 
-    try {
-      await api.delete(`/api/gallery/${id}`);
-      toast.success("Image deleted ✅");
-      fetchGallery();
-    } catch (error) {
-      console.error("Image delete error:", error);
-      toast.error("Delete failed ❌");
-    }
-  };
+  try {
+    console.log("Deleting Image ID:", id); // 👈 DEBUG
+
+    await api.delete(`/api/gallery/${id}`);
+
+    toast.success("Image deleted ✅");
+    fetchGallery();
+  } catch (error) {
+    console.error("FULL ERROR:", error);
+    console.error("RESPONSE:", error.response?.data);
+    toast.error(error.response?.data?.message || "Delete failed ❌");
+  }
+};
 
   return (
     <div className="admin-dashboard">
@@ -331,16 +336,13 @@ const handleDeleteNotice = async (id) => {
     <div key={notice._id} className="card">
       <h3>{notice.title}</h3>
 
-      <a
-        href={`https://docs.google.com/gview?url=${encodeURIComponent(
-          notice.document
-        )}&embedded=true`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="download-btn"
-      >
-        Open Circular
-      </a>
+    <a
+  href={`${notice.document}?fl_attachment=true`}
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  Open Circular
+</a>
 
       <div className="action-buttons">
         <button
@@ -368,12 +370,16 @@ const handleDeleteNotice = async (id) => {
       <h2 className="section-title">Gallery</h2>
 
       <form onSubmit={handleGalleryUpload} className="gallery-upload-form">
-        <input
-          key={galleryKey}
-          type="file"
-          multiple
-          onChange={(e) => setGalleryImagesToUpload(e.target.files)}
-        />
+       <input
+  key={galleryKey}
+  type="file"
+  multiple
+  onChange={(e) => {
+    const files = Array.from(e.target.files);
+    setGalleryImagesToUpload(files);
+    setDescriptions(new Array(files.length).fill(""));
+  }}
+/>
         <button className="gov-btn">Upload</button>
       </form>
 
