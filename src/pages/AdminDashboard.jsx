@@ -25,6 +25,7 @@ function AdminDashboard() {
   const [noticeFile, setNoticeFile] = useState(null);
   const [noticeKey, setNoticeKey] = useState(Date.now());
   const [noticeEditId, setNoticeEditId] = useState(null);
+  const [descriptions, setDescriptions] = useState([]);
 
   useEffect(() => {
     fetchEvents();
